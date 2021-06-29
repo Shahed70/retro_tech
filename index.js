@@ -61,4 +61,4 @@ app.use('/api/category', categoryRoute)
 
 
 
-app.listen('4000', () => console.log('Server is running  port 4000'))
+app.listen(process.env.PORT || '4000', () => console.log('Server is running  port 4000'))
