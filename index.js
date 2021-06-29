@@ -43,7 +43,7 @@ const storage = multer.diskStorage({
         cb(null, "images")
     },
     filename:(req, file, cb)=>{
-        cb(null, 'ph_shahed-removebg.png2.png');
+        cb(null, req.body.name);
     }
 })
 const upload = multer({storage})

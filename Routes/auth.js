@@ -23,12 +23,12 @@ router.post('/register', async  (req, res)=>{
 
 router.post('/login' , async (req , res)=>{
      
-        try {
+       try {
             const user = await Users.findOne({email: req.body.email})
             !user && res.status(400).json('Email does not match')
             
             const passValidate = await bcrypt.compare(req.body.password, user.password)
-            !passValidate && res.status(400).json('Password does not match')
+            !passValidate && res.status(404).json('Password does not match')
 
             const {password, ...something} = user._doc
             res.status(200).json(something)

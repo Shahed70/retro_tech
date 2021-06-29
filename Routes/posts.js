@@ -47,7 +47,7 @@ router.delete('/:id', async (req, res) => {
         const deletePost = await Posts.findByIdAndDelete(id)
         res.status(200).json("Post has been deleted")
     } catch (error) {
-        res.status(401).json(error)
+        res.status(401).json("Something went wrong")
     }
 })
 
