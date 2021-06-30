@@ -40,14 +40,14 @@ app.get('/', (req, res) => {
 
 const storage = multer.diskStorage({
     destination:(req, file, cb) =>{
-        cb(null, "images")
+        cb(null, "./public")
     },
     filename:(req, file, cb)=>{
-        cb(null, req.body.name);
+        cb(null, file.fieldname +""+ Date.now()+path.extname(file.originalname));
     }
 })
-const upload = multer({storage})
-app.post('/api/upload', upload.single('file'), (req, res)=>{
+const upload = multer({storage}).single('file')
+app.post('/api/upload', upload, (req, res)=>{
     res.status(200).json('File has been uploaded successfully')
 })
 

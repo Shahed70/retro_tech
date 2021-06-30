@@ -5,18 +5,10 @@ const Posts = require('./../models/Posts')
 
 
 router.post('/create', async (req, res) => {
-
-    try {
-        const newPost = new Posts(req.body)
-        const post = await newPost.save()
-        res.status(200).json(post)
-
-    } catch (error) {
-        res.status(500).json(error)
-    }
+    const file = req.file
+    const { title, dectn, name, categories } = req.body
+    console.log( title, dectn, name,  file)
 })
-
-
 
 //update
 router.put('/:id', async (req, res) => {
@@ -65,24 +57,21 @@ router.get('/allPosts', async (req, res) => {
 
 
 router.get('/searchPosts', async (req, res) => {
-    const name = req.query.name
     const category = req.query.category
     try {
-      let posts;
-      if(name){
-          posts = await Posts.find({name})
-      }else if(category){
-        posts = await Posts.find({
-            categories:{
-                $in:[category]
-            }
-        })
-      }else {
-        posts = await Posts.find({})
-      }
+        let posts;
+        if (category) {
+            posts = await Posts.find({
+                categories: {
+                    $in: [category]
+                }
+            })
+        } else {
+            posts = await Posts.find({})
+        }
         res.status(200).json(posts)
     } catch (error) {
-       res.status(404).json(error)
+        res.status(404).json(error)
     }
 })
 
