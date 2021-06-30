@@ -47,7 +47,8 @@ const storage = multer.diskStorage({
     }
 })
 const upload = multer({storage}).single('file')
-app.post('/api/upload', upload, (req, res)=>{
+app.post('/api/upload', upload,(req, res)=>{
+    
     res.status(200).json('File has been uploaded successfully')
 })
 
@@ -61,4 +62,4 @@ app.use('/api/category', categoryRoute)
 
 
 
-app.listen(process.env.PORT || '4000', () => console.log('Server is running  port 4000'))
+app.listen(process.env.PORT || '5000', () => console.log('Server is running  port 5000'))

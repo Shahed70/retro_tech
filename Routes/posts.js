@@ -5,9 +5,10 @@ const Posts = require('./../models/Posts')
 
 
 router.post('/create', async (req, res) => {
-    const file = req.file
     const { title, dectn, name, categories } = req.body
-    console.log( title, dectn, name,  file)
+    const post = await Posts.create({title, dectn, name,})
+     res.status(200).json(post)
+   
 })
 
 //update
